@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Online Quiz Game</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    background:linear-gradient(135deg,#ffecd2,#fcb69f,#ffdde1,#ee9ca7);
+    background-size:400% 400%;
+    animation:bgAnimation 12s ease infinite;
+    position:relative;
+}
+
+/* Background Animation */
+
+@keyframes bgAnimation{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+/* Floating Balls */
+
+.ball{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,0.3);
+    backdrop-filter:blur(5px);
+    animation:float 10s linear infinite;
+}
+
+.ball1{
+    width:120px;
+    height:120px;
+    left:10%;
+    top:15%;
+}
+
+.ball2{
+    width:180px;
+    height:180px;
+    right:10%;
+    top:20%;
+    animation-duration:14s;
+}
+
+.ball3{
+    width:100px;
+    height:100px;
+    left:20%;
+    bottom:10%;
+    animation-duration:12s;
+}
+
+.ball4{
+    width:150px;
+    height:150px;
+    right:20%;
+    bottom:5%;
+    animation-duration:16s;
+}
+
+@keyframes float{
+
+    0%{
+        transform:translateY(0px) rotate(0deg);
+    }
+
+    50%{
+        transform:translateY(-40px) rotate(180deg);
+    }
+
+    100%{
+        transform:translateY(0px) rotate(360deg);
+    }
+}
+
+/* Main Card */
+
+.quiz-box{
+    width:430px;
+    padding:45px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.25);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,0.4);
+    box-shadow:0 15px 40px rgba(0,0,0,0.15);
+    text-align:center;
+    z-index:10;
+    animation:popup 1s ease;
+}
+
+/* Popup */
+
+@keyframes popup{
+
+    0%{
+        transform:scale(0.5);
+        opacity:0;
+    }
+
+    100%{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+/* Heading */
+
+.quiz-box h1{
+    color:#5a189a;
+    font-size:34px;
+    margin-bottom:15px;
+    line-height:45px;
+    text-shadow:0 0 10px rgba(255,255,255,0.8);
+}
+
+/* Subtitle */
+
+.subtitle{
+    color:#6d6875;
+    margin-bottom:30px;
+    font-size:16px;
+}
+
+/* Input */
+
+#username{
+    width:100%;
+    padding:16px;
+    border:none;
+    outline:none;
+    border-radius:15px;
+    margin-bottom:25px;
+    font-size:16px;
+    background:rgba(255,255,255,0.8);
+    color:#333;
+    transition:0.4s;
+}
+
+#username:focus{
+    transform:scale(1.03);
+    box-shadow:0 0 20px rgba(255,105,180,0.5);
+}
+
+/* Button */
+
+#start-btn{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:15px;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    color:white;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3,#b388ff);
+    background-size:300% 300%;
+    animation:btnAnimation 5s ease infinite;
+    transition:0.4s;
+    box-shadow:0 10px 25px rgba(255,105,180,0.4);
+}
+
+#start-btn:hover{
+    transform:translateY(-3px) scale(1.04);
+    box-shadow:0 10px 30px rgba(255,105,180,0.7);
+}
+
+/* Button Animation */
+
+@keyframes btnAnimation{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+/* Message */
+
+#message{
+    margin-top:25px;
+    font-size:20px;
+    font-weight:600;
+    color:#5a189a;
+    animation:glow 1s infinite alternate;
+}
+
+@keyframes glow{
+
+    from{
+        opacity:0.6;
+    }
+
+    to{
+        opacity:1;
+        text-shadow:0 0 15px white;
+    }
+}
+
+/* Footer */
+
+footer{
+    margin-top:20px;
+    text-align:center;
+    font-size:15px;
+    color:white;
+    font-weight:500;
+    letter-spacing:1px;
+    text-shadow:0 2px 5px rgba(0,0,0,0.3);
+    z-index:10;
+}
+
+/* Mobile */
+
+@media(max-width:500px){
+
+    .quiz-box{
+        width:90%;
+        padding:30px;
+    }
+
+    .quiz-box h1{
+        font-size:26px;
+        line-height:35px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Floating Balls -->
+
+<div class="ball ball1"></div>
+<div class="ball ball2"></div>
+<div class="ball ball3"></div>
+<div class="ball ball4"></div>
+
+<!-- Main Card -->
+
+<div class="quiz-box">
+
+    <h1>WELCOME TO ONLINE QUIZ GAME</h1>
+
+    <p class="subtitle">
+        Test Your Knowledge & Enjoy The Quiz Experience
+    </p>
+
+    <input 
+        type="text"
+        id="username"
+        placeholder="Enter Your Name"
+    >
+
+    <button id="start-btn">
+        Start Quiz
+    </button>
+
+    <div id="message"></div>
+
+</div>
+
+<!-- Footer -->
+
+<footer>
+    © 2026 Online Quiz System | Developed By Zuber Thakur
+</footer>
+
+<script>
+
+const startBtn = document.getElementById("start-btn");
+
+const username = document.getElementById("username");
+
+const message = document.getElementById("message");
+
+startBtn.addEventListener("click", () => {
+
+    let name = username.value;
+
+    if(name === ""){
+
+        message.innerHTML = "⚠ Please Enter Your Name";
+
+        message.style.color = "red";
+    }
+
+    else{
+
+        localStorage.clear();
+
+        localStorage.setItem("username", name);
+
+        message.innerHTML = `🎉 Best Of Luck ${name} 🎉`;
+
+        message.style.color = "#5a189a";
+
+        setTimeout(() => {
+
+            window.location.href = "quiz1.html";
+
+        }, 3000);
+    }
+
+});
+
+</script>
+
+</body>
+</html>
